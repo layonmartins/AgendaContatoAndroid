@@ -9,6 +9,8 @@ import android.content.*;
 public class ActContato extends AppCompatActivity implements View.OnClickListener {
 
     private ImageButton btnAdicionar;
+    private EditText edtPesquisa;
+    private ListView lstContatos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,7 +18,10 @@ public class ActContato extends AppCompatActivity implements View.OnClickListene
         setContentView(R.layout.act_contato);
 
         btnAdicionar = (ImageButton) findViewById(R.id.btnAdicionar);
+        edtPesquisa = (EditText)findViewById(R.id.edtPesquisa);
+        lstContatos = (ListView)findViewById(R.id.lstContatos);
         btnAdicionar.setOnClickListener(this);
+
     }
 
     @Override

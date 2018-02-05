@@ -46,7 +46,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/edt_Endereco"
+                android:id="@+id/edtEndereco"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -80,7 +80,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/edt_Telefone"
+                android:id="@+id/edtTelefone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -114,7 +114,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/edt_Email"
+                android:id="@+id/edtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -148,7 +148,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/edt_DatasEspeciais"
+                android:id="@+id/edtDatasEspeciais"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -178,7 +178,7 @@
             android:text="@string/lbl_Grupo" />
 
         <EditText
-            android:id="@+id/edt_Grupo"
+            android:id="@+id/edtGrupo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
