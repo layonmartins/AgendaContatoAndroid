@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">AgendaContato</string>
+    <string name="lbl_Nome">Nome</string>
+    <string name="lbl_telefone">Telefone</string>
+    <string name="lbl_email">Email</string>
+    <string name="lbl_Endereco">Endereço</string>
+    <string name="lbl_Grupo">Grupo</string>
+    <string name="lbl_DatasEspeciais">Datas Especiais</string>
 </resources>
