@@ -3,6 +3,7 @@ package com.layon.agendacontato;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.*;
+import android.view.*;
 
 public class ActCadContatos extends AppCompatActivity {
 
@@ -76,6 +77,27 @@ public class ActCadContatos extends AppCompatActivity {
         adpTipoDatasEspeciais.add("Aniversário");
         adpTipoDatasEspeciais.add("Data comemorativa");
         adpTipoDatasEspeciais.add("Outros");
+    }
 
+
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_act_cad_contatos, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch(item.getItemId()){
+            case R.id.mni_acao1:
+
+                break;
+            case R.id.mni_acao2:
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

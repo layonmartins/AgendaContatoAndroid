@@ -6,4 +6,10 @@
     <string name="lbl_Endereco">Endereço</string>
     <string name="lbl_Grupo">Grupo</string>
     <string name="lbl_DatasEspeciais">Datas Especiais</string>
+    <string name="action_settings">Menu</string>
+
+    <string name="lbl_salvar">Salvar</string>
+    <string name="lbl_alterar">Alterar</string>
+    <string name="lbl_excluir">Excluir</string>
+
 </resources>
