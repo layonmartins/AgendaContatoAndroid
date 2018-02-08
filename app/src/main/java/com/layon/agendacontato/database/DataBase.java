@@ -1,4 +1,4 @@
-package com.layon.agendacontato;
+package com.layon.agendacontato.database;
 
 import android.content.Context;
 import android.database.sqlite.*;

@@ -9,6 +9,9 @@ import android.content.*;
 import android.database.sqlite.*;
 import android.database.*;
 
+import com.layon.agendacontato.database.DataBase;
+import com.layon.agendacontato.dominio.RepositorioContato;
+
 public class ActContato extends AppCompatActivity implements View.OnClickListener {
 
     private ImageButton btnAdicionar;
@@ -16,6 +19,8 @@ public class ActContato extends AppCompatActivity implements View.OnClickListene
     private ListView lstContatos;
     private DataBase dataBase;
     private SQLiteDatabase conn;
+    private ArrayAdapter<String> adpContatos;
+    private RepositorioContato repositorioContato;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +33,13 @@ public class ActContato extends AppCompatActivity implements View.OnClickListene
         btnAdicionar.setOnClickListener(this);
         try {
             dataBase = new DataBase(this);
-            conn = dataBase.getReadableDatabase();
+            conn = dataBase.getWritableDatabase();
+
+            repositorioContato = new RepositorioContato(conn);
+            repositorioContato.testeInserirContatos();
+            adpContatos = repositorioContato.buscaContatos(this);
+
+            lstContatos.setAdapter(adpContatos);
 
             AlertDialog.Builder dlg = new AlertDialog.Builder(this);
             dlg.setMessage("Conexão criada com sucesso!");

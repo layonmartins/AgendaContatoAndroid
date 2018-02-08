@@ -1,4 +1,4 @@
-package com.layon.agendacontato;
+package com.layon.agendacontato.database;
 
 
 public class ScriptSQL {
