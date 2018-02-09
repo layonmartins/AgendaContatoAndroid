@@ -11,6 +11,7 @@ import android.database.*;
 
 import com.layon.agendacontato.database.DataBase;
 import com.layon.agendacontato.dominio.RepositorioContato;
+import com.layon.agendacontato.dominio.entidades.Contato;
 
 public class ActContato extends AppCompatActivity implements View.OnClickListener {
 
@@ -19,7 +20,7 @@ public class ActContato extends AppCompatActivity implements View.OnClickListene
     private ListView lstContatos;
     private DataBase dataBase;
     private SQLiteDatabase conn;
-    private ArrayAdapter<String> adpContatos;
+    private ArrayAdapter<Contato> adpContatos;
     private RepositorioContato repositorioContato;
 
     @Override
@@ -31,20 +32,18 @@ public class ActContato extends AppCompatActivity implements View.OnClickListene
         edtPesquisa = (EditText)findViewById(R.id.edtPesquisa);
         lstContatos = (ListView)findViewById(R.id.lstContatos);
         btnAdicionar.setOnClickListener(this);
+
         try {
             dataBase = new DataBase(this);
             conn = dataBase.getWritableDatabase();
 
             repositorioContato = new RepositorioContato(conn);
-            repositorioContato.testeInserirContatos();
+
             adpContatos = repositorioContato.buscaContatos(this);
 
             lstContatos.setAdapter(adpContatos);
 
-            AlertDialog.Builder dlg = new AlertDialog.Builder(this);
-            dlg.setMessage("Conexão criada com sucesso!");
-            dlg.setNeutralButton("OK", null);
-            dlg.show();
+
 
         }catch(SQLException ex){
             AlertDialog.Builder dlg = new AlertDialog.Builder(this);
@@ -58,6 +57,12 @@ public class ActContato extends AppCompatActivity implements View.OnClickListene
     @Override
     public void onClick(View v) {
         Intent it = new Intent(this, ActCadContatos.class);
-        startActivity(it);
+        startActivityForResult(it, 0);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        adpContatos = repositorioContato.buscaContatos(this);
+        lstContatos.setAdapter(adpContatos);
     }
 }

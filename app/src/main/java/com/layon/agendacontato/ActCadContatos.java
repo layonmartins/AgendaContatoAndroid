@@ -1,9 +1,18 @@
 package com.layon.agendacontato;
 
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.*;
 import android.view.*;
+
+import com.layon.agendacontato.database.DataBase;
+import com.layon.agendacontato.dominio.RepositorioContato;
+import com.layon.agendacontato.dominio.entidades.Contato;
+
+import java.util.Date;
 
 public class ActCadContatos extends AppCompatActivity {
 
@@ -24,12 +33,19 @@ public class ActCadContatos extends AppCompatActivity {
     private ArrayAdapter<String> adpTipoEndereco;
     private ArrayAdapter<String> adpTipoDatasEspeciais;
 
+    private DataBase dataBase;
+    private SQLiteDatabase conn;
+    private RepositorioContato repositorioContato;
+    private Contato contato;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_cad_contatos);
 
         edtNome = (EditText)findViewById(R.id.edtNome);
+        edtTelefone = (EditText)findViewById(R.id.edtTelefone);
         edtEmail = (EditText)findViewById(R.id.edtEmail);
         edtEndereco = (EditText)findViewById(R.id.edtEndereco);
         edtDatasEspeciais = (EditText)findViewById(R.id.edtDatasEspeciais);
@@ -77,6 +93,23 @@ public class ActCadContatos extends AppCompatActivity {
         adpTipoDatasEspeciais.add("Aniversário");
         adpTipoDatasEspeciais.add("Data comemorativa");
         adpTipoDatasEspeciais.add("Outros");
+
+        try {
+            dataBase = new DataBase(this);
+            conn = dataBase.getWritableDatabase();
+
+            repositorioContato = new RepositorioContato(conn);
+
+
+
+
+        }catch(SQLException ex){
+            AlertDialog.Builder dlg = new AlertDialog.Builder(this);
+            dlg.setMessage("Erro ao criar o banco: " + ex.getMessage());
+            dlg.setNeutralButton("OK", null);
+            dlg.show();
+        }
+
     }
 
 
@@ -92,12 +125,43 @@ public class ActCadContatos extends AppCompatActivity {
 
         switch(item.getItemId()){
             case R.id.mni_acao1:
-
+                    if(contato == null){
+                        inserir();
+                    }
+                    finish();
                 break;
             case R.id.mni_acao2:
                 break;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void inserir(){
+
+        try {
+            contato = new Contato();
+
+            contato.setNome(edtNome.getText().toString());
+            contato.setTelefone(edtTelefone.getText().toString());
+            contato.setEmail(edtEmail.getText().toString());
+            contato.setEndereco(edtEndereco.getText().toString());
+            Date date = new Date();
+            contato.setDatasEspeciais(date);
+            contato.setGrupos(edtGrupo.getText().toString());
+
+            contato.setTipoTelefone("");
+            contato.setTipoEmail("");
+            contato.setTipoEndereco("");
+            contato.setTipoDatasEspeciais("");
+
+            repositorioContato.inserir(contato);
+
+        }catch (Exception ex) {
+            AlertDialog.Builder dlg = new AlertDialog.Builder(this);
+            dlg.setMessage("Erro ao inserir os dados: " + ex.getMessage());
+            dlg.setNeutralButton("OK", null);
+            dlg.show();
+        }
     }
 }
